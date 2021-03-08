@@ -3,15 +3,16 @@
     <div
       class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row"
     >
-      <RouterLink
-        :to="{ name: 'Home' }"
-        class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
-      >
-        <img alt="Vite logo" src="@/assets/vite-logo.svg" width="36px" />
-        <span class="ml-3 text-xl dark:text-white">
-          {{ appName }}
-        </span>
-      </RouterLink>
+      <form class="m-4 flex">
+        <input
+          class="rounded-l-lg p-4 text-gray-800 bg-gray-100 dark:bg-gray-700"
+          type="url"
+          placeholder="Controller URI"
+        />
+        <button class="px-8 rounded-r-lg bg-yellow-400 font-bold p-4 uppercase">
+          Set
+        </button>
+      </form>
       <nav
         class="flex flex-wrap items-center justify-center text-base md:ml-auto"
       >

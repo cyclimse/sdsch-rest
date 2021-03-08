@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 export const routes: RouteConfig[] = [
   {
     path: "/",
-    name: "Home",
+    name: "Appliances",
     component: Home,
   },
   {
