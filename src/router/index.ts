@@ -29,7 +29,7 @@ export const routes: RouteConfig[] = [
 ];
 
 const router = new VueRouter({
-  base: "/",
+  base: import.meta.env.BASE_URL,
   mode: "history",
   routes,
 });
