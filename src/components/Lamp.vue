@@ -28,12 +28,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue-demi";
+import axios from "axios";
 
 export default defineComponent({
   name: "Lamp",
   props: {
-    title: { type: String, required: true },
-    text: { type: String, required: true },
     url: { type: String, required: true },
   },
   data() {
@@ -46,11 +45,30 @@ export default defineComponent({
     toggle() {
       this.isActive = !this.isActive;
     },
+    async requestTemp() {
+      console.log("Requested temp");
+      try {
+        const resp = await axios.get(this.url + "/temp");
+        console.log(resp.data);
+      } catch (err) {
+        // Handle Error Here
+        console.error("toto" + err);
+      }
+    },
   },
   computed: {
     cssVars: function () {
       return { "--glow-color": this.color };
     },
+  },
+  created: function () {
+    /* eslint-disable @typescript-eslint/no-this-alias */
+    let self = this;
+    setInterval(function () {
+      if (self.isActive) {
+        self.requestTemp();
+      }
+    }, 1000);
   },
 });
 </script>

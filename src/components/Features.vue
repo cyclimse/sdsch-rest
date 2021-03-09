@@ -13,11 +13,7 @@
         />
       </div>
       <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
-        <Lamp
-          title="vite-plugin-vue2"
-          text="Vue 2 support for Vite"
-          url="https://github.com/underfin/vite-plugin-vue2"
-        />
+        <Lamp url="http://localhost:3000" />
       </div>
     </div>
   </section>
