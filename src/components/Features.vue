@@ -13,8 +13,26 @@
         />
       </div>
       <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
-        <Lamp url="http://localhost:3000" />
+        <Lamp :url="this.url" />
       </div>
     </div>
   </section>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue-demi";
+
+export default defineComponent({
+  name: "Features",
+  data() {
+    return {
+      url: "",
+    };
+  },
+  watch: {
+    $route(to, from) {
+      this.url = to.query.ctrl;
+    },
+  },
+});
+</script>

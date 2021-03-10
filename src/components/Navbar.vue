@@ -3,18 +3,22 @@
     <div
       class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row"
     >
-      <form class="m-4 flex">
+      <form @submit.prevent="() => {}" class="m-4 flex">
         <input
           class="rounded-l-lg p-4 text-gray-800 bg-gray-100 dark:bg-gray-700"
           type="url"
+          v-model="url"
           placeholder="Controller URI"
         />
-        <button class="px-8 rounded-r-lg bg-yellow-400 font-bold p-4 uppercase">
+        <button
+          v-on:click="router.push({ path: '/', query: { ctrl: url } })"
+          class="px-8 rounded-r-lg bg-yellow-400 font-bold p-4 uppercase"
+        >
           Set
         </button>
       </form>
       <nav
-        class="flex flex-wrap items-center justify-center text-base md:ml-auto"
+        class="flex flex-wrap items-center justify-center t ext-base md:ml-auto"
       >
         <RouterLink
           v-for="(route, index) in routes"
@@ -58,6 +62,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue-demi";
 import { routes } from "@/router";
+import { default as router } from "@/router";
 import { useDark, useToggle } from "@vueuse/core";
 
 export default defineComponent({
@@ -71,7 +76,19 @@ export default defineComponent({
     const isDark = useDark();
     const toggle = useToggle(isDark);
 
-    return { appName, routes: availableRoutes, currentRoute, toggle, isDark };
+    return {
+      appName,
+      routes: availableRoutes,
+      currentRoute,
+      toggle,
+      isDark,
+      router: router,
+    };
+  },
+  data() {
+    return {
+      url: "",
+    };
   },
 });
 </script>
