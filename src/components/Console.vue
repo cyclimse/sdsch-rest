@@ -10,11 +10,12 @@
         <div class="ml-2 h-3 w-3 bg-green-500 rounded-full"></div>
       </div>
       <div v-for="(request, index) in requests" :key="index" class="mt-4 fle">
-        <span class="text-green-400">computer:~$</span>
-        <p class="flex-1 typing items-center pl-2">
-          {{ request.method }} to {{ request.url }} with {{ request.data }}
+        <span class="text-green-400"> {{ request.who }}:~$</span>
+        <span class="flex-1 typing items-center pl-2">
+          {{ request.method }} to {{ request.url }}
+          {{ request.data ? "with " + request.data : "" }}
           <br />
-        </p>
+        </span>
       </div>
     </div>
   </div>
@@ -35,14 +36,32 @@ export default defineComponent({
     };
   },
   methods: {
-    log(config) {
+    logRequests(config) {
       // Do something before request is sent
       console.log(config);
-      let { url, method, data } = config;
+      let { url, method, data, headers } = config;
       if (this.$refs.terminal.scrollHeight > this.$refs.terminal.clientHeight) {
         this.requests = [];
       }
-      this.requests.push({ url: url, method: method, data: data });
+      this.requests.push({
+        who: headers.From,
+        url: url,
+        method: method.toUpperCase(),
+        data: JSON.stringify(data),
+      });
+      return config;
+    },
+    logResponse(config) {
+      let { data } = config;
+      if (this.$refs.terminal.scrollHeight > this.$refs.terminal.clientHeight) {
+        this.requests = [];
+      }
+      this.requests.push({
+        who: "Server",
+        url: "me",
+        method: "Responded",
+        data: JSON.stringify(data),
+      });
       return config;
     },
   },
@@ -50,7 +69,11 @@ export default defineComponent({
     /* eslint-disable @typescript-eslint/no-this-alias */
     let self = this;
     // Add a request interceptor
-    axios.interceptors.request.use(self.log, function (error) {
+    axios.interceptors.request.use(self.logRequests, function (error) {
+      // Do something with request error
+      return Promise.reject(error);
+    });
+    axios.interceptors.response.use(self.logResponse, function (error) {
       // Do something with request error
       return Promise.reject(error);
     });

@@ -8,7 +8,7 @@
           class="rounded-l-lg p-4 text-gray-800 bg-gray-100 dark:bg-gray-700"
           type="url"
           v-model="url"
-          placeholder="Controller URI"
+          placeholder="http://127.0.0.1:5005"
         />
         <button
           v-on:click="router.push({ path: '/', query: { ctrl: url } })"

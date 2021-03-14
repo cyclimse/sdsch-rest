@@ -2,7 +2,7 @@
   <div
     class="flex flex-col h-full p-8 bg-gray-100 rounded-lg items dark:bg-gray-700"
   >
-    <Heading2> Colored lamp </Heading2>
+    <Heading2> Single lamp </Heading2>
 
     <div class="flex flex-col flex-grow">
       <bi:lightbulb
@@ -38,27 +38,37 @@ export default defineComponent({
   data() {
     return {
       isActive: false,
-      color: "blue",
+      color: "white",
+      intensity: 100,
+      frequency: 60.0 / 3.0,
     };
   },
   methods: {
     toggle() {
       this.isActive = !this.isActive;
     },
-    async requestTemp() {
-      console.log("Requested temp");
+    async request() {
       try {
-        const resp = await axios.get(this.url + "/temp");
-        console.log(resp.data);
+        const resp = await axios.get(this.url + "/lamp", {
+          headers: { From: "Lamp" },
+        });
+        this.color = resp.data.color;
+        this.intensity = 2000 / Math.min(Math.max(resp.data.intensity, 0), 100);
+        this.frequency = resp.data.frequency;
       } catch (err) {
         // Handle Error Here
-        console.error("toto" + err);
+        this.color = "white";
       }
     },
   },
   computed: {
     cssVars: function () {
-      return { "--glow-color": this.color };
+      return {
+        "--glow-color": this.color,
+        "--max-intensity": this.intensity + "px",
+        "--min-intensity": 0.1 * this.intensity + "px",
+        "--duration": 60 / this.frequency + "s",
+      };
     },
   },
   created: function () {
@@ -66,7 +76,7 @@ export default defineComponent({
     let self = this;
     setInterval(function () {
       if (self.isActive) {
-        self.requestTemp();
+        self.request();
       }
     }, 1000);
   },
@@ -76,19 +86,19 @@ export default defineComponent({
 <style scoped>
 @keyframes pulse {
   from {
-    filter: drop-shadow(0px 0px 50px var(--glow-color));
+    filter: drop-shadow(0px 0px var(--max-intensity) var(--glow-color));
   }
   50% {
-    filter: drop-shadow(0px 0px 15px var(--glow-color));
+    filter: drop-shadow(0px 0px var(--min-intensity) var(--glow-color));
   }
   to {
-    filter: drop-shadow(0px 0px 50px var(--glow-color));
+    filter: drop-shadow(0px 0px var(--max-intensity) var(--glow-color));
   }
 }
 
 .pulse {
   animation-name: pulse;
-  animation-duration: 3s;
+  animation-duration: var(--duration);
   animation-iteration-count: infinite;
 }
 </style>

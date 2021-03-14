@@ -43,12 +43,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue-demi";
+import axios from "axios";
 
 export default defineComponent({
   name: "Thermometer",
   props: {
-    title: { type: String, required: true },
-    text: { type: String, required: true },
     url: { type: String, required: true },
   },
   data() {
@@ -61,6 +60,33 @@ export default defineComponent({
     toggle() {
       this.isActive = !this.isActive;
     },
+    async postTemp() {
+      this.temperature =
+        20 *
+          Math.abs(Math.sin((((Date.now() / 5000) % 20) / 20) * 2 * Math.PI)) +
+        3;
+      this.temperature = Math.round(this.temperature);
+      try {
+        const resp = await axios.post(
+          this.url + "/therm",
+          { temperature: this.temperature },
+          {
+            headers: { From: "Thermometer" },
+          }
+        );
+      } catch (err) {
+        // Handle Error Here
+      }
+    },
+  },
+  created: function () {
+    /* eslint-disable @typescript-eslint/no-this-alias */
+    let self = this;
+    setInterval(function () {
+      if (self.isActive) {
+        self.postTemp();
+      }
+    }, 5000);
   },
 });
 </script>

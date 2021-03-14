@@ -6,14 +6,13 @@
     </div>
     <div class="flex flex-wrap -m-4">
       <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
-        <Thermometer
-          title="vite-plugin-vue2"
-          text="Vue 2 support for Vite"
-          url="https://github.com/underfin/vite-plugin-vue2"
-        />
+        <Thermometer :url="this.url" />
       </div>
       <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
         <Lamp :url="this.url" />
+      </div>
+      <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
+        <Leds :url="this.url" />
       </div>
     </div>
   </section>
@@ -26,7 +25,7 @@ export default defineComponent({
   name: "Features",
   data() {
     return {
-      url: "",
+      url: "http://127.0.0.1:5005",
     };
   },
   watch: {
