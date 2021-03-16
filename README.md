@@ -1,78 +1,28 @@
-<h1 align="center">Vite ⚡ - Vue 2 starter template</h1>
+# SDSCH Rest
 
-<p align="center">
-  Create a Vue 2 application bundled by the lightning fast build tool <a href="https://github.com/vitejs/vite">Vite</a>
-</p>
+## Usage
 
-<p align="center">
- <a href="https://vite-vue2-starter.netlify.app"> ✨ Live Demo</a>
-</p>
+The lab will be done in Python on a jupyter notebook. You will need to install some Python dependencies. We recommend to use a Python venv as to not affect your existing installation.
 
-# 🔥 Features
+Here is one way to do it:
 
-* ⚡️ [Vite 2](https://github.com/vitejs/vite), [Vue 2](https://github.com/vuejs/vue) and [Composition-API](https://github.com/vuejs/composition-api)
-* 🚦 [Vue-Router](https://github.com/vuejs/vue-router)
-* 📦 [Components auto importing](https://github.com/antfu/vite-plugin-components)
-* 🎨 [Windi CSS](https://github.com/windicss/vite-plugin-windicss) - on-demand Tailwind CSS with speed and dark mode
-* 😃 [Icons as Vue components](https://github.com/antfu/vite-plugin-icons) - powered by [Iconify](https://github.com/iconify/iconify)
-* 🧰 [VueUse](https://github.com/vueuse/vueuse) - collection of essential Vue Composition Utilities 
-* 🔍 ESLint + Prettier 
-* 🦾 Typescript
-# 📦 Vite plugins
-
-* [`vite-plugin-vue2`](https://github.com/underfin/vite-plugin-vue2) -
-  Vue 2 support for Vite
-* [`vite-plugin-components`](https://github.com/antfu/vite-plugin-components) -
-  On demand components auto importing for Vite
-* [`vite-plugin-windicss`](https://github.com/windicss/vite-plugin-windicss) -
-  WindiCSS/TailwindCSS for Vite
-* [`vite-plugin-icons`](https://github.com/antfu/vite-plugin-icons) -
-  Access thousands of icons as Vue components in Vite 
-
-# 🚀 Getting started
-
-## GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/lstoeferle/vite-vue2-windicss-starter/generate)
-
-When you use this template, try follow the checklist to update your info properly
-
-- [ ] Rename `name` field in `package.json`
-- [ ] Change the author name in `LICENSE`
-- [ ] Change the app name in `.env`
-- [ ] Change the favicon in `public`
-- [ ] Clean up the README(s) and remove routes
-
-## Clone 
-
-If you prefer to do it manually with a cleaner git history
-
-```bash
-npx degit lstoeferle/vite-vue2-windicss-starter my-vite-vue2-app
-cd my-vite-vue2-app
-npm i
+```console
+python -m venv myvenv
+source myvenv/bin/activate
+python -m pip install flask flask-cors
+jupyter-notebook . 
 ```
 
-# Usage
+You can also install jupyter-notebook in your virtual environment if you do not have it on your computer by adding `jupyter-notebook` to the installation command.
 
-## Development
-
-Just run and visit [http://localhost:8080](http://localhost:8080)
-
-```bash
-npm run dev
+```console
+python -m pip install flask flask-cors jupyter-notebook
 ```
 
-## Build 
+Make sure to select the right Python environment in the jupyter client. In any case, let us know if you have any trouble getting the lab to work on your machine and we will try and assist you to the best of our abilities.
 
-To build the App, run
+## Web client
 
-```bash
-npm run build
-```
+The web application with all the devices can be found [here](https://cyclimse.github.io/sdsch-rest/).
 
-And you will see the generated files in `dist`, which are ready to be served.
-
-# Why
-
-Vue 3 is awesome, but we should not forget about supporting Vue 2 ♥️
+Have fun!
