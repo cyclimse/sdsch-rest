@@ -34,14 +34,8 @@
         >
           {{ route.name }}
         </RouterLink>
-        <RouterLink
-          class="flex items-center justify-center mr-2 text-black w-9 h-9 dark:text-white"
-          to="/aliens"
-        >
-          <MdiAlien />
-        </RouterLink>
         <a
-          href="https://github.com/lstoeferle/vite-vue2-windicss-starter"
+          href="https://github.com/cyclimse/sdsch-rest"
           target="_blank"
           class="flex items-center justify-center mr-2 text-black w-9 h-9 dark:text-white"
         >

@@ -2,7 +2,11 @@
   <section class="container px-5 py-12 mx-auto text-gray-600 body-font">
     <div class="flex flex-col w-full mb-8 text-center">
       <Heading1> Appliances </Heading1>
-      <p class="dark:text-gray-300">Blabla qui donne explications</p>
+      <p class="dark:text-gray-300">
+        Below are a few devices which behave as REST clients. Try turning them
+        on, and then take a look at their requests being displayed on the
+        console!
+      </p>
     </div>
     <div class="flex flex-wrap -m-4">
       <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
@@ -11,7 +15,7 @@
       <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
         <Lamp :url="this.url" />
       </div>
-      <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-1/4">
+      <div class="w-full py-4 pr-4 xs:pl-4 md:w-1/2 lg:w-2/4">
         <Leds :url="this.url" />
       </div>
     </div>
